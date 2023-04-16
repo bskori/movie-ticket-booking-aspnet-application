@@ -1,0 +1,57 @@
+﻿@model Cinema
+
+@{
+    ViewData["Title"] = "Add a new cinema";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <p>
+            <h1>Add a new cinema</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form asp-action="Create">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group text-center">
+                        <img class="border border-info rounded-circle" id="ProfilePictureView" style="max-width:150px"   />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="@Model.Logo"></label>
+                        <input class="form-control" asp-for="@Model.Logo" />
+                        <span class="text-danger" asp-validation-for="@Model.Logo"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="@Model.Name"></label>
+                        <input class="form-control" asp-for="@Model.Name" />
+                        <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="@Model.Description"></label>                        
+                        <input class="form-control" asp-for="@Model.Description" />
+                        <span class="text-danger" asp-validation-for="@Model.Description"></span>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-outline-success float-right" type="submit"><i class="bi-send-fill"></i>Create</button>
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePictureView');
+            output.src = $("#Logo").val();
+        })
+
+        $("#Logo").on("change", function () {
+            var output = document.getElementById('ProfilePictureView');
+            output.src = $(this).val();
+        });
+    </script>
+}

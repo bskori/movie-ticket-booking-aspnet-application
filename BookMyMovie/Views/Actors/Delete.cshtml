@@ -1,0 +1,37 @@
+﻿@model  Actor
+
+@{ 
+    ViewData["Title"] = "Remove actor";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <p>
+            <h1>Confirm Deletion of @Model.FullName</h1>
+        </p>
+        <div class="col-md-8 offset-md-2">
+            <div class="text-center form-group">
+                <img class="rounded-circle" src="@Model.ProfilePictureURL" alt="@Model.FullName" height="150" width="150" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="@Model.ProfilePictureURL"></label>
+                <input class="form-control" asp-for="@Model.ProfilePictureURL" readonly />
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="@Model.FullName"></label>
+                <input class="form-control" asp-for="@Model.FullName" readonly />
+            </div>
+            <div class="form-group">
+                <label class="control-label" asp-for="@Model.Bio"></label>
+                <input class="form-control" asp-for="@Model.Bio" readonly />
+            </div>
+            <div>
+                <form method="post" asp-action="Delete">
+                    <input asp-for="@Model.Id" type="hidden" />
+                    <input class="btn btn-outline-danger float-right" type="submit" value="Confirm" />
+                </form>
+                <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+            </div>
+        </div>
+    </div>
+</div>
