@@ -332,22 +332,40 @@ namespace BookMyMovie.Data
 
                 //Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                string appUserEmail = "user@bookmymovie.com";
+                
+                //admin-user
+                string adminUserEmail = "admin@bookmymovie.com";
+
+                var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+                if(adminUser == null)
+                {
+                    var newAdminUser = new ApplicationUser()
+                    {
+                        Fullname = "Admin User",
+                        UserName = "admin-user",
+                        Email = adminUserEmail,
+                        EmailConfirmed = true
+                    };
+                    await userManager.CreateAsync(newAdminUser, "Coding@1234?");
+                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                }
+
+                //app-user
+                var appUserEmail = "user@bookmymovie.com";
 
                 var appUser = await userManager.FindByEmailAsync(appUserEmail);
                 if(appUser == null)
                 {
                     var newAppUser = new ApplicationUser()
                     {
-                        Fullname = "Admin User",
-                        UserName = "admin",
+                        Fullname = "Application User",
+                        UserName = "app-user",
                         Email = appUserEmail,
                         EmailConfirmed = true
                     };
                     await userManager.CreateAsync(newAppUser, "Coding@1234?");
                     await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
                 }
-
 
             }
         }

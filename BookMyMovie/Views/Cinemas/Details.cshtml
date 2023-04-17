@@ -28,9 +28,12 @@
                 </div>
                 <div class="form-group">
                     <a class="btn btn-outline-secondary" asp-action="Index"> Show All </a>
-                    <a class="btn btn-outline-primary float-right" asp-controller="Cinemas" asp-action="Edit" asp-route-id="@Model.Id">
-                        Edit
-                    </a>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-outline-primary float-right" asp-controller="Cinemas" asp-action="Edit" asp-route-id="@Model.Id">
+                            Edit
+                        </a>
+                    }
                 </div>
             </div>
         </div>
